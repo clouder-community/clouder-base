@@ -1,4 +1,4 @@
-FROM ubuntu-debootstrap:trusty
+FROM ubuntu:latest
 MAINTAINER Yannick Buron yburon@goclouder.net
 
 # generate a locale and ensure it on system users
