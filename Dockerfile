@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER Yannick Buron yburon@goclouder.net
 
-RUN apk add --update ssmtp wget curl rsync
+RUN apk add --update ssmtp wget curl rsync bash
 
 # generate a locale and ensure it on system users
 #RUN locale-gen en_US.UTF-8 && update-locale && echo 'LANG="en_US.UTF-8"' > /etc/default/locale
