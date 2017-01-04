@@ -1,7 +1,12 @@
-FROM alpine:latest
+FROM alpine:3.5
 MAINTAINER Yannick Buron yburon@goclouder.net
 
 RUN apk add --update ssmtp wget curl rsync bash
+
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+
+ENTRYPOINT ['/docker-entrypoint.sh']
+CMD ['cat']
 
 # generate a locale and ensure it on system users
 #RUN locale-gen en_US.UTF-8 && update-locale && echo 'LANG="en_US.UTF-8"' > /etc/default/locale
