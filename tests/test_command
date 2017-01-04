@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+#
+# Copyright 2016 LasLabs Inc.
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+
+OUTPUT=`docker exec -i -t $DOCKER_CONTAINER_ID ps aux`
+
+echo $OUTPUT | grep -q "cat"
+
+echo "Container $DOCKER_CONTAINER_ID is running cat"

@@ -1,0 +1,35 @@
+sudo: required
+
+language: python
+
+services:
+  - docker
+
+env:
+  global:
+    # These are for pushing to DockerHub
+    - DOCKER_REPO="clouder/clouder-base"
+    - DOCKER_USER="clouder-bot"
+    - DOCKER_TAG="alpine"
+    # Generate this per repo with the following:
+    #   travis encrypt '$DOCKER_PASS="$DOCKER_PASS"'-r LasLabs/repo-name
+    - secure: "$DOCKER_PASS_TOKEN"
+    - PROD_BRANCH="alpine"
+    - DAEMONIZE="1"
+    - LINT_IGNORE="DL4001"
+
+  matrix:
+    - TESTS="1"
+    - LINT_CHECK="1"
+    - HUB="1"
+
+install:
+  - git clone --depth=1 https://github.com/LasLabs/docker-quality-tools.git -b release/0.1 ${HOME}/docker-quality-tools
+  - export PATH=${HOME}/docker-quality-tools/travis:${PATH}
+  - travis_install
+
+script:
+  - travis_run
+
+after_success:
+  - travis_after_success
